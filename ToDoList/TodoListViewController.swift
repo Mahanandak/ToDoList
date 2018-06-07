@@ -35,5 +35,26 @@ class TodoListViewController: UITableViewController {
              tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         }
     }
+    
+    //MARK : Add new items
+    
+    @IBAction func addBtnPressed(_ sender: Any) {
+        var textField = UITextField()
+        let alert  = UIAlertController.init(title: "Add Item", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            if let textFieldText = textField.text{
+               self.itemArray.append(textFieldText)
+                self.tableView.reloadData()
+            }
+            
+        }
+        alert.addTextField(configurationHandler: { (alertTextField) in
+            alertTextField.placeholder = "Create New Item"
+            textField = alertTextField
+        })
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
